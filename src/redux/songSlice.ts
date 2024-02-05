@@ -6,7 +6,7 @@ export const songSlice = createSlice({
   initialState: initialState,
   reducers: {
     getSongsFetch: (state) => {
-      state.isLoading = false;
+      state.isLoading = true;
       state.error = '';
     },
     getSongsSuccess: (state, action) => {

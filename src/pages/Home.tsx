@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getSongsFetch } from "../redux/songSlice";
 import { Link } from "react-router-dom";
+import {  } from '@emotion/react';
 
 // const Container = styled.div`
 //   display: flex;
@@ -15,8 +16,8 @@ import { Link } from "react-router-dom";
 // `;
 
 const Home = () => {
-  const songs = useSelector((state: IState) => state.songs.songs);
-  
+  const {isLoading,songs} = useSelector((state: IState) => state.songs);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,8 +26,11 @@ const Home = () => {
 
   return (
     <>
+    <Flex itemCenter>
       <h1>Manage songs</h1>
-      <table>
+      <Link to="/songs/new">Add New song</Link>
+    </Flex>
+      {isLoading ? <h5>Loading</h5>:<table>
         <thead>
           <tr>
             <th>Title</th>
@@ -45,9 +49,10 @@ const Home = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table>}
+      
 
-      <Link to="/songs/new">Add New song</Link>
+      
     </>
   );
 };
