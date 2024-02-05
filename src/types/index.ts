@@ -13,3 +13,10 @@ interface Song {
 "createdAt": string,
 "updatedAt": string
 }
+
+interface SongState {
+    "songs" : Song[] | null,
+    "isLoading": boolean,
+    "error": string
+
+}

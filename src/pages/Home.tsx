@@ -16,7 +16,7 @@ const Container = styled.div`
 `;
 
 const Home = () => {
-  const songs = useSelector((state) => state.songs.songs);
+  const songs = useSelector((state: SongState) => state.songs);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {songs.map((song) => (
+          {songs?.map((song) => (
             <tr key={song._id}>
               <td>{song.title}</td>
               <td>{song.artist}</td>
@@ -47,7 +47,6 @@ const Home = () => {
         </tbody>
       </table>
 
-      {/* <div>{JSON.stringify(songs)}</div> */}
       <Link to="/songs/new">Add New song</Link>
     </>
   );
