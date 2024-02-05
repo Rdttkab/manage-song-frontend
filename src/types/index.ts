@@ -15,8 +15,11 @@ interface Song {
 }
 
 interface SongState {
-    "songs" : Song[] | null,
+    "songs" : Song[],
     "isLoading": boolean,
     "error": string
+}
 
+interface IState {
+    songs: SongState
 }

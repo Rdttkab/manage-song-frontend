@@ -1,16 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const songInitialState: SongState = {
-
-    songs: null,
-    isLoading: false,
-    error: '',
-
-}
+const initialState: SongState = { songs: [], isLoading: false, error: "" }
 
 export const songSlice = createSlice({
   name: "songs",
-  initialState: songInitialState,
+  initialState: initialState,
   reducers: {
     getSongsFetch: (state) => {
       state.isLoading = false;

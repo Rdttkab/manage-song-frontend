@@ -15,7 +15,8 @@ import { Link } from "react-router-dom";
 // `;
 
 const Home = () => {
-  const songs = useSelector((state: SongState) => state.songs);
+  const songs = useSelector((state: IState) => state.songs.songs);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
