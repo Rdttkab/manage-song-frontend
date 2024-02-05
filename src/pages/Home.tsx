@@ -2,18 +2,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getSongsFetch } from "../redux/songSlice";
 import { Link } from "react-router-dom";
-import styled from "@emotion/styled";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
+// const Container = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   gap: 1rem;
 
-  > div {
-    font-size: 20px;
-    font-weight: bold;
-  }
-`;
+//   > div {
+//     font-size: 20px;
+//     font-weight: bold;
+//   }
+// `;
 
 const Home = () => {
   const songs = useSelector((state: SongState) => state.songs);
