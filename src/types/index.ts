@@ -1,25 +1,30 @@
-interface ISongs {
-    "success": boolean,
-"message": string,
-"song": []
+export interface ISongs {
+  success: boolean;
+  message: string;
+  song: [];
+}
+export interface ISong {
+  success: boolean;
+  message: string;
+  song: Song;
 }
 
-interface Song {
-    "_id": string,
-"title": string,
-"artist": string,
-"album": string,
-"genre": string,
-"createdAt": string,
-"updatedAt": string
+export interface Song {
+  _id: string;
+  title: string;
+  artist: string;
+  album: string;
+  genre: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
-interface SongState {
-    "songs" : Song[],
-    "isLoading": boolean,
-    "error": string
+export interface SongState {
+  songs: Song[];
+  isLoading: boolean;
+  error: string;
 }
 
-interface IState {
-    songs: SongState
+export interface IState {
+  songs: SongState;
 }
