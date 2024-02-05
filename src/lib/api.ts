@@ -1,7 +1,4 @@
 const base_url = import.meta.env.VITE_BASE_URL;
 
-export const getSongs = async () => {
-  console.log("🚀 ~ base_url:", base_url);
+export const getSongs = async (): Promise<ISongs> => fetch(`${base_url}/song`).then(res=>res.json());
 
-  return fetch(`/${base_url}/breeds`).then((res) => res.json());
-};

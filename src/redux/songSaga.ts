@@ -1,17 +1,16 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { getSongsSuccess } from "./songSlice";
+import { getSongs } from "../lib/api";
+
 
 function* workGetSongsFetch() {
-  const songs = yield call(() => fetch("http://localhost:4000/song"));
-  const formattedSongs = yield songs.json();
+  const songs: ISongs = yield call(getSongs);
 
-  // const formattedSongsSHortened = formattedSongs.slice(0, 10);
-
-  yield put(getSongsSuccess(formattedSongs.song));
+  yield put(getSongsSuccess(songs.song));
 }
 
 function* songSaga() {
-  yield takeEvery("songs/getSongsFetch", workGetSongsFetch);
+  yield takeLatest("songs/getSongsFetch", workGetSongsFetch);
 }
 
 export default songSaga;
