@@ -8,6 +8,8 @@ import styled from "@emotion/styled";
 const Container = styled.div`
   min-width: 760px;
   width: 100%;
+  padding: 2.5 rem;
+  background-color: rgb(243 244 246)
 `;
 
 const TitleContainer = styled.div`
@@ -22,10 +24,19 @@ const TitleContainer = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  padding: 8px;
-  background-color: #22c55e;
+  background-color: rgb(79 70 229);
   color: white;
-  border-radius: 4px;
+  border-radius: 0.375rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  text-align: center;
+  font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+
 
   :hover {
     color: #e2e8f0;
@@ -35,10 +46,6 @@ const StyledLink = styled(Link)`
 const Table = styled.table`
   margin: 2rem 0;
   text-align: center;
-  /* border-collapse: collapse; */
-
-  /* border: 1px solid #d946ef; */
-  /* border-radius: 4px; */
 
   tr {
     margin: 8px 0;
@@ -49,9 +56,7 @@ const Table = styled.table`
   th {
     width: 100px;
     padding: 0.5rem 1rem;
-    /* margin: 1rem; */
     text-align: center;
-    /* border: 1px solid #d946ef; */
     border-radius: 8px;
   }
 `;
@@ -59,6 +64,14 @@ const Table = styled.table`
 const Button = styled.button`
   background-color: red;
   color: white;
+`;
+
+const Section = styled.section`
+max-width: 80rem;
+padding-left: 2rem;
+padding-right: 2rem;
+margin-left: auto;
+margin-right: auto;
 `;
 
 const Home = () => {
@@ -72,8 +85,14 @@ const Home = () => {
 
   return (
     <Container>
+      <h1>Manage songs</h1>
+      <Section>
+
       <TitleContainer>
-        <h1>Manage songs</h1>
+        <div>
+
+        <h3>Songs</h3>
+        </div>
         <StyledLink to="/songs/new">Add New song</StyledLink>
       </TitleContainer>
       {isLoading ? (
@@ -110,6 +129,7 @@ const Home = () => {
           </tbody>
         </Table>
       )}
+      </Section>
     </Container>
   );
 };

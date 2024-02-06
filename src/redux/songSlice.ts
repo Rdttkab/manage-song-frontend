@@ -24,6 +24,19 @@ export const songSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload.error;
     },
+    addSong: (state) => {
+      state.isLoading = true;
+      state.error = "";
+    },
+    addSongSuccess: (state, action) => {
+      state.songs = [...state.songs, action.payload];
+      state.isLoading = false;
+      state.error = "";
+    },
+    addSongFailure: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload.error;
+    },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     deleteSong: (state, action: { payload: string }) => {
       state.isLoading = true;
@@ -44,12 +57,15 @@ export const songSlice = createSlice({
 });
 
 export const {
-  getSongsFailure,
   getSongs,
   getSongsSuccess,
-  deleteSongFailure,
+  getSongsFailure,
   deleteSong,
   deleteSongSuccess,
+  deleteSongFailure,
+  addSong,
+  addSongSuccess,
+  addSongFailure,
 } = songSlice.actions;
 
 export default songSlice.reducer;

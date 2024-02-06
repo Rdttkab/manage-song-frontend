@@ -1,11 +1,13 @@
 import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 import {
+  addSongFailure,
+  addSongSuccess,
   deleteSongFailure,
   deleteSongSuccess,
   getSongsFailure,
   getSongsSuccess,
 } from "./songSlice";
-import { deleteSong, getSongs } from "../lib/api";
+import { addSong, deleteSong, getSongs } from "../lib/api";
 import { ISong, ISongs } from "../types";
 
 function* getSongsSaga() {
@@ -19,6 +21,24 @@ function* getSongsSaga() {
 }
 function* watchGetSongs() {
   yield takeLatest("songs/getSongs", getSongsSaga);
+}
+
+function* addSongSaga({
+  payload,
+}: {
+  payload: { song: string; artist: string; album: string; genre: string };
+}) {
+  try {
+    const song: ISong = yield call(addSong, payload);
+
+    yield put(addSongSuccess(song.song));
+  } catch (error) {
+    yield put(addSongFailure(error));
+  }
+}
+
+function* watchAddSong() {
+  yield takeLatest("songs/addSong", addSongSaga);
 }
 
 function* deleteSongSaga({ payload }: { payload: string }) {
@@ -36,7 +56,7 @@ function* watchDeleteSong() {
 }
 
 function* rootSaga() {
-  yield all([fork(watchGetSongs), fork(watchDeleteSong)]);
+  yield all([fork(watchGetSongs), fork(watchDeleteSong), fork(watchAddSong)]);
 }
 
 export default rootSaga;
