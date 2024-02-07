@@ -6,23 +6,25 @@ import { IState } from "../types";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-const thStyles = css({
-  color: "rgb(17 24 39)",
-  fontWeight: 600,
-  fontSize: "0.875rem",
-  lineHeight: "1.25rem",
-  textAlign: "left",
-  padding: "0.875rem 0.75rem",
-});
+const StyledTh = styled.th<{ header?: boolean }>`
+  color: rgb(17 24 39);
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: left;
+  padding: 0.875rem 0.75rem;
 
-const tdStyles = css({
-  color: "rgb(107 114 128)",
-  fontSize: "0.875rem",
-  lineHeight: "1.25rem",
-  padding: "1rem 0.75rem",
-  whiteSpace: "nowrap",
-  textAlign: "left",
-});
+  padding-left: ${(props) => (props.header ? "1.5rem" : "0.75rem")};
+`;
+
+const StyledTd = styled.td<{ header?: boolean }>`
+  color: rgb(107 114 128);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 1rem 0.75rem;
+  white-space: nowrap;
+  text-align: left;
+`;
 
 const Home = () => {
   const { isLoading, songs } = useSelector((state: IState) => state.songs);
@@ -106,8 +108,7 @@ const Home = () => {
                   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
                     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 
-                  --tw-text-opacity: 1;
-                  color: rgb(255 255 255 / var(--tw-text-opacity));
+                  color: rgb(255 255 255);
 
                   font-weight: 600;
 
@@ -118,8 +119,7 @@ const Home = () => {
 
                   padding: 0.5rem 0.75rem;
 
-                  --tw-bg-opacity: 1;
-                  background-color: rgb(79 70 229 / var(--tw-bg-opacity));
+                  background-color: rgb(79 70 229);
 
                   border-radius: 0.375rem;
 
@@ -140,26 +140,13 @@ const Home = () => {
               `}>
               <div
                 css={css`
-                  margin-left: -2rem;
-                  margin-right: -2rem;
-
-                  overflow-x: auto;
-
-                  margin-top: -0.5rem;
-                  margin-bottom: -0.5rem;
+                  margin: -0.5rem, -2rem;
                 `}>
                 <div
                   css={css`
-                    padding-left: 2rem;
-                    padding-right: 2rem;
-
+                    padding: 0.5rem 2rem;
                     vertical-align: middle;
-
-                    padding-top: 0.5rem;
-                    padding-bottom: 0.5rem;
-
                     min-width: 100%;
-
                     display: inline-block;
                   `}>
                   <div
@@ -167,8 +154,9 @@ const Home = () => {
                       border-radius: 0.5rem;
 
                       --tw-ring-opacity: 0.05;
-
                       --tw-ring-color: rgb(0 0 0 / var(--tw-ring-opacity));
+                      --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1),
+                        0 1px 2px -1px rgb(0 0 0 / 0.1);
 
                       --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
                         var(--tw-ring-offset-width) var(--tw-ring-offset-color);
@@ -177,11 +165,6 @@ const Home = () => {
                         var(--tw-ring-color);
                       box-shadow: var(--tw-ring-offset-shadow),
                         var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-
-                      --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1),
-                        0 1px 2px -1px rgb(0 0 0 / 0.1);
-                      --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color),
-                        0 1px 2px -1px var(--tw-shadow-color);
 
                       overflow: hidden;
                     `}>
@@ -194,58 +177,13 @@ const Home = () => {
                           background-color: rgb(249 250 251);
                         `}>
                         <tr>
-                          <th
-                            scope="col"
-                            css={css`
-                              color: rgb(17 24 39);
-
-                              font-weight: 600;
-                              font-size: 0.875rem;
-                              line-height: 1.25rem;
-                              text-align: left;
-
-                              padding: 0.875rem;
-                              padding-right: 0.75rem;
-                              padding-left: 1.5rem;
-                            `}>
+                          <StyledTh scope="col" header>
                             Name
-                          </th>
-                          <th scope="col" css={thStyles}>
-                            Title
-                          </th>
-                          <th scope="col" css={thStyles}>
-                            Email
-                          </th>
-                          <th scope="col" css={thStyles}>
-                            Role
-                          </th>
-                          <th
-                            scope="col"
-                            css={css`
-                              padding-right: 1.5rem;
-
-                              padding-left: 0.75rem;
-
-                              padding-top: 0.875rem;
-                              padding-bottom: 0.875rem;
-
-                              position: relative;
-                            `}>
-                            <span
-                              css={css`
-                                position: absolute;
-                                width: 1px;
-                                height: 1px;
-                                padding: 0;
-                                margin: -1px;
-                                overflow: hidden;
-                                clip: rect(0, 0, 0, 0);
-                                white-space: nowrap;
-                                border-width: 0;
-                              `}>
-                              Edit
-                            </span>
-                          </th>
+                          </StyledTh>
+                          <StyledTh scope="col">Title</StyledTh>
+                          <StyledTh scope="col">Email</StyledTh>
+                          <StyledTh scope="col">Role</StyledTh>
+                          <StyledTh scope="col"></StyledTh>
                         </tr>
                       </thead>
                       <tbody
@@ -274,12 +212,12 @@ const Home = () => {
                         `}>
                         {songs?.map((song) => (
                           <tr key={song._id}>
-                            <td
+                            <StyledTd
+                              header
                               css={css`
                                 padding-left: 1.5rem;
 
-                                --tw-text-opacity: 1;
-                                color: rgb(17 24 39 / var(--tw-text-opacity));
+                                color: rgb(17 24 39);
 
                                 font-weight: 500;
 
@@ -296,10 +234,10 @@ const Home = () => {
                                 text-align: left;
                               `}>
                               {song.title}
-                            </td>
-                            <td css={tdStyles}>{song.artist}</td>
-                            <td css={tdStyles}>{song.album}</td>
-                            <td css={tdStyles}>{song.genre}</td>
+                            </StyledTd>
+                            <StyledTd>{song.artist}</StyledTd>
+                            <StyledTd>{song.album}</StyledTd>
+                            <StyledTd>{song.genre}</StyledTd>
                             <td
                               css={css`
                                 padding-right: 1.5rem;
@@ -328,14 +266,40 @@ const Home = () => {
                                 `}>
                                 Edit
                               </Link>
-                              <span>|</span>
-                              <Link
-                                to="#"
+                              <span
+                                css={css`
+                                  color: rgb(79 70 229);
+                                `}>
+                                |
+                              </span>
+
+                              <button
+                                type="button"
+                                onClick={() => dispatch(deleteSong(song._id))}
                                 css={css`
                                   color: #f43f5e;
+
+                                  font-weight: 600;
+
+                                  font-size: 0.875rem;
+                                  line-height: 1.25rem;
+
+                                  text-align: center;
+
+                                  display: block;
+
+                                  padding: 0.5rem;
+                                  background-color: white;
+                                  border: 0;
+
+                                  :hover {
+                                    background-color: white;
+                                    border: 0;
+                                    outline: 0;
+                                  }
                                 `}>
                                 Delete
-                              </Link>
+                              </button>
                             </td>
                           </tr>
                         ))}

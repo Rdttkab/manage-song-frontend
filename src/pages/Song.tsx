@@ -1,7 +1,5 @@
-import Example from "./1";
-
 const Song = () => {
-  return <Example />;
+  return <div>song</div>;
 };
 
 export default Song;

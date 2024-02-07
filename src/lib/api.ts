@@ -22,6 +22,23 @@ export const addSong = async (data: {
     body: JSON.stringify(data),
   }).then((res) => res.json());
 
+export const updateSong = async (
+  id: string,
+  data: {
+    song?: string;
+    artist?: string;
+    album?: string;
+    genre?: string;
+  }
+): Promise<ISong> =>
+  fetch(`${base_url}/song/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((res) => res.json());
+
 export const deleteSong = async (id: string): Promise<ISong> =>
   fetch(`${base_url}/song/${id}`, {
     method: "DELETE",

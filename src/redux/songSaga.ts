@@ -7,7 +7,7 @@ import {
   getSongsFailure,
   getSongsSuccess,
 } from "./songSlice";
-import { addSong, deleteSong, getSongs } from "../lib/api";
+import { addSong, deleteSong, getSong, getSongs, updateSong } from "../lib/api";
 import { ISong, ISongs } from "../types";
 
 function* getSongsSaga() {
@@ -21,6 +21,19 @@ function* getSongsSaga() {
 }
 function* watchGetSongs() {
   yield takeLatest("songs/getSongs", getSongsSaga);
+}
+
+function* getSongSaga({ payload }: { payload: string }) {
+  try {
+    const songs: ISong = yield call(getSong, payload);
+
+    yield put(getSongsSuccess(songs.song));
+  } catch (error) {
+    yield put(getSongsFailure(error));
+  }
+}
+function* watchGetSong() {
+  yield takeLatest("songs/getSongs", getSongSaga);
 }
 
 function* addSongSaga({
@@ -40,6 +53,25 @@ function* addSongSaga({
 function* watchAddSong() {
   yield takeLatest("songs/addSong", addSongSaga);
 }
+function* updateSongSaga({
+  payload,
+  id,
+}: {
+  payload: { song: string; artist: string; album: string; genre: string };
+  id: string;
+}) {
+  try {
+    const song: ISong = yield call(updateSong, id, payload);
+
+    yield put(addSongSuccess(song.song));
+  } catch (error) {
+    yield put(addSongFailure(error));
+  }
+}
+
+function* watchUpdateSong() {
+  yield takeLatest("songs/addSong", updateSongSaga);
+}
 
 function* deleteSongSaga({ payload }: { payload: string }) {
   try {
@@ -56,7 +88,13 @@ function* watchDeleteSong() {
 }
 
 function* rootSaga() {
-  yield all([fork(watchGetSongs), fork(watchDeleteSong), fork(watchAddSong)]);
+  yield all([
+    fork(watchGetSongs),
+    fork(watchGetSong),
+    fork(watchAddSong),
+    fork(watchUpdateSong),
+    fork(watchDeleteSong),
+  ]);
 }
 
 export default rootSaga;
