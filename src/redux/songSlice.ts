@@ -24,11 +24,12 @@ export const songSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload.error;
     },
-    addSong: (state) => {
+    addSong: (state, action) => {
+      console.log(action.payload);
       state.isLoading = true;
       state.error = "";
     },
-    addSongSuccess: (state, action) => {
+    addSongSuccess: (state, action:{ payload: Song }) => {
       state.songs = [...state.songs, action.payload];
       state.isLoading = false;
       state.error = "";
@@ -37,8 +38,9 @@ export const songSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload.error;
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     deleteSong: (state, action: { payload: string }) => {
+      console.log(action.payload);
       state.isLoading = true;
       state.error = "";
     },
