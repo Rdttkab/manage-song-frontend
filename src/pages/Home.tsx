@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { IState } from "../types";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { useNavigate } from "react-router-dom";
 
 const StyledTh = styled.th<{ header?: boolean }>`
   color: rgb(17 24 39);
@@ -28,6 +29,7 @@ const StyledTd = styled.td<{ header?: boolean }>`
 
 const Home = () => {
   const { isLoading, songs } = useSelector((state: IState) => state.songs);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -102,6 +104,7 @@ const Home = () => {
               `}>
               <button
                 type="button"
+                onClick={() => navigate("/songs/new")}
                 css={css`
                   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
                   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
