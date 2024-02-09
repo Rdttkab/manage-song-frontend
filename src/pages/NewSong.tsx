@@ -211,6 +211,7 @@ const NewSong = () => {
           `}>
           <button
             type="button"
+            onClick={() => navigate("/")}
             css={css`
               font-size: 0.875rem;
               line-height: 1.25rem;
