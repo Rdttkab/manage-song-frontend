@@ -240,20 +240,14 @@ const Home = () => {
                             <StyledTd>{song.genre}</StyledTd>
                             <td
                               css={css`
-                                padding-right: 1.5rem;
-
+                                padding: 1rem 1.5rem;
                                 font-weight: 500;
-
                                 font-size: 0.875rem;
                                 line-height: 1.25rem;
-
-                                padding-left: 0.75rem;
-
-                                padding-top: 1rem;
-                                padding-bottom: 1rem;
-
                                 white-space: nowrap;
-
+                                  
+                                padding-left: 0.75rem;
+                                
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
