@@ -77,7 +77,7 @@ const Home = () => {
 
                   text-align: left;
                 `}>
-                Users
+                Songs
               </h1>
               <p
                 css={css`
@@ -91,8 +91,7 @@ const Home = () => {
 
                   text-align: left;
                 `}>
-                A list of all the users in your account including their name,
-                title, email and role.
+                A list of all the songs.
               </p>
             </div>
             <div
@@ -128,7 +127,7 @@ const Home = () => {
 
                   display: block;
                 `}>
-                Add user
+                Add song
               </button>
             </div>
           </div>
